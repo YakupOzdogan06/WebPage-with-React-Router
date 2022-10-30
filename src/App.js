@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
+import Aws from "./pages/Aws";
+
+import Contact from "./pages/Contact";
+import FullStack from "./pages/FullStack";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Paths from "./pages/Paths";
+import People from "./pages/People";
+import PersonDetails from "./pages/PersonDetails";
+import PrivateRouter from "./pages/PrivateRouter";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="people" element={<People />} />
+        <Route path="people/:id" element={<PersonDetails />} />
+        <Route path="paths" element={<Paths />}>
+          <Route index element={<FullStack />} />
+          <Route path="aws" element={<Aws />} />
+        </Route>
+
+        <Route path="contact" element={<PrivateRouter />}>
+          <Route path="" element={<Contact />} />
+        </Route>
+        <Route path="login" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 
